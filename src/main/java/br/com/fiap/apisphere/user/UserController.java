@@ -17,19 +17,21 @@ public class UserController {
     UserService service;
 
     @GetMapping
-    public List<User> findAll() {
+    public List<User> findAll(){
         return service.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody UserFormRequest userForm, UriComponentsBuilder uriBuilder) {
-        var user = service.created(userForm.toModel());
+    public ResponseEntity<UserResponse> create(@RequestBody UserFormRequest userForm, UriComponentsBuilder uriBuilder){
+        var user = service.create(userForm.toModel());
         var uri = uriBuilder
-                .path("/users/{id}")
-                .buildAndExpand(user.getId())
-                .toUri();
+                    .path("/users/{id}")
+                    .buildAndExpand(user.getId())
+                    .toUri();
+
         return ResponseEntity
                 .created(uri)
                 .body(UserResponse.from(user));
     }
+
 }

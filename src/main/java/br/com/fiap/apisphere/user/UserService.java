@@ -7,15 +7,15 @@ import java.util.List;
 
 @Service
 public class UserService {
-
     @Autowired
     UserRepository repository;
 
-    public List<User> findAll() {
+    public List<User> findAll(){
         return repository.findAll();
     }
 
-    public User created(User user) {
+    public User create(User user){
         return repository.save(user);
     }
+
 }
